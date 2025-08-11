@@ -213,7 +213,11 @@
           console.warn('載入播放清單失敗', e);
           more.style.display = 'none';
         }
-      }
+      }  
+      more.addEventListener('click', load);
+      // 首次載入 9 支（3x3）
+      load();
+    }
 
     
     function ytThumb(id){
