@@ -176,7 +176,11 @@
     // ======== 取得 YouTube 影片 ========
     async function fetchLatestVideoIds(){
       const { apiKey, channelId, maxResults, manualVideoIds } = CONFIG.youtube;
-      if (!apiKey) return manualVideoIds; // 無 Key 就用手動清單
+      // if (!apiKey) return manualVideoIds;
+      if (!apiKey) {
+        // 後備：用手動清單，補成 {id,title}
+        return manualVideoIds.map(id => ({ id, title: '' }));
+      }
       try {
         const url = new URL('https://www.googleapis.com/youtube/v3/search');
         url.searchParams.set('key', apiKey);
@@ -188,10 +192,17 @@
         const res = await fetch(url);
         if (!res.ok) throw new Error('YouTube API 錯誤');
         const data = await res.json();
-        return data.items.map(v => v.id && v.id.videoId).filter(Boolean);
+        // return data.items.map(v => v.id && v.id.videoId).filter(Boolean);
+        return data.items
+          .map(v => ({
+            id: v.id && v.id.videoId,
+            title: v.snippet?.title || ''
+          }))
+          .filter(v => !!v.id);
       } catch (err) {
         console.warn('[YouTube] 讀取失敗，改用手動清單', err);
-        return CONFIG.youtube.manualVideoIds;
+        // return CONFIG.youtube.manualVideoIds;
+        return CONFIG.youtube.manualVideoIds.map(id => ({ id, title: '' }));
       }
     }
 
@@ -241,7 +252,6 @@
         <span class="thumb"><img loading="lazy" src="${ytThumb(id)}" alt="${title || 'YouTube 影片'}" /></span>
         <div class="meta">
           <p class="title">${title || 'YouTube 影片'}</p>
-          <small>點擊前往 YouTube</small>
         </div>`;
       return a;
     }
@@ -267,17 +277,22 @@
     }
 
     async function init(){
-      const ids = await fetchLatestVideoIds();
+      // const ids = await fetchLatestVideoIds();
+      const videos = await fetchLatestVideoIds();
       const track = document.getElementById('yt-track');
       const grid = document.getElementById('yt-grid');
 
       // 前 4 個放在 Carousel（可自行調整數量）
-      const head = ids.slice(0, 4);
-      head.forEach(id => track.appendChild(createCard(id)));
+      // const head = ids.slice(0, 4);
+      // head.forEach(id => track.appendChild(createCard(id)));
+      const head = videos.slice(0, 4);
+      head.forEach(v => track.appendChild(createCard(v.id, v.title)));
 
       // 其餘放在 3 欄 Grid，自動換列
-      const rest = ids.slice(4);
-      rest.forEach(id => grid.appendChild(createGridCell(id)));
+      // const rest = ids.slice(4);
+      // rest.forEach(id => grid.appendChild(createGridCell(id)));
+      const rest = videos.slice(4);
+      rest.forEach(v => grid.appendChild(createGridCell(v.id, v.title)));
 
       bindCarouselNav();
     }
