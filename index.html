@@ -90,6 +90,43 @@
     .vcell .meta { padding: 10px 12px; }
     .more { display:flex; justify-content:center; margin-top:10px; }
     .footer { text-align:center; color: var(--muted); font-size: 12px; margin-top: 18px; }
+  
+    /* 基本：先把滾動條藏起來 */
+    .carousel .track{
+      /* 你的原本設定 */
+      display:flex; gap:12px; overflow-x:auto; scroll-snap-type:x proximity;
+    
+      /* 覆蓋：不要保留底部空間、先隱藏捲軸 */
+      padding-bottom: 0;
+      scrollbar-width: none;      /* Firefox */
+      -ms-overflow-style: none;   /* IE/舊 Edge */
+    }
+    .carousel .track::-webkit-scrollbar{ height:0 } /* Chrome/Safari */
+    
+    /* 滑鼠移入（或鍵盤聚焦）才顯示細捲軸 */
+    .carousel:hover .track,
+    .carousel:focus-within .track{
+      padding-bottom: 6px;        /* 出現捲軸時再留空 */
+      scrollbar-width: thin;      /* Firefox */
+    }
+    .carousel:hover .track::-webkit-scrollbar,
+    .carousel:focus-within .track::-webkit-scrollbar{
+      height: 8px;
+    }
+    .carousel:hover .track::-webkit-scrollbar-thumb,
+    .carousel:focus-within .track::-webkit-scrollbar-thumb{
+      background: rgba(148,163,184,.5);
+      border-radius: 999px;
+    }
+    .carousel:hover .track::-webkit-scrollbar-track,
+    .carousel:focus-within .track::-webkit-scrollbar-track{
+      background: transparent;
+    }
+    
+    /* （可選）左右箭頭也只在 hover 顯示 */
+    .carousel .navBtn{ opacity:0; pointer-events:none; transition:opacity .2s }
+    .carousel:hover .navBtn{ opacity:1; pointer-events:auto }
+      
   </style>
 </head>
 <body>
@@ -120,7 +157,6 @@
         </a> -->
         
         <a class="btn iconbtn" href="https://www.twitch.tv/leihustore" target="_blank" rel="noopener" aria-label="Twitch" style="color:#9146FF">
-          <!-- 用你現在的做法：CDN 圖或 <svg> 皆可 -->
           <img class="icon" src="https://cdn.simpleicons.org/twitch/9146FF" alt="">
           <span class="label">Twitch</span>
         </a>
