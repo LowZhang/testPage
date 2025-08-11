@@ -39,7 +39,21 @@
     @media (min-width: 720px) { .linksRow { grid-template-columns: repeat(3, 1fr); } }
     .btn { display:flex; align-items:center; justify-content:center; gap:10px; padding: 14px 16px; border-radius: var(--radius); border:1px solid var(--border); background:#1f2937; color:#e5e7eb; text-decoration:none; font-weight:700; text-align:center; transition: transform .06s ease, background .2s ease; }
     .btn:hover { transform: translateY(-1px); background:#273446; }
+    /* Icon buttons */
+    .linksRow .btn.iconbtn { padding: 16px; }
+    .icon { width: 22px; height: 22px; display: block; fill: currentColor; }
+    .sr-only {
+      position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+      overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+    }
+    /* 品牌色（只影響 icon 顏色） */
+    .iconbtn.-tw { color: #a970ff; }   /* Twitch 紫 */
+    .iconbtn.-yt { color: #ff0033; }   /* YouTube 紅 */
+    .iconbtn.-shop { color: #22c55e; } /* 賣場/購物 綠 */
 
+
+
+    
     .twoCol { display:grid; gap: 16px; }
     @media (min-width: 980px) { .twoCol { grid-template-columns: 1.2fr 1fr; } }
     .h2 { margin: 0 0 10px; font-size: clamp(18px, 2.4vw, 22px); letter-spacing:.5px; }
@@ -78,9 +92,33 @@
     <div class="gap"></div>
     <section class="section">
       <div class="linksRow">
-        <a class="btn" href="https://www.twitch.tv/leihustore" target="_blank" rel="noopener">Twitch</a>
-        <a class="btn" href="https://www.youtube.com/@leihustore" target="_blank" rel="noopener">YouTube</a>
-        <a class="btn" href="https://famistore.famiport.com.tw/famistore/users/28555/malls/0100000000000000003ad1cd" target="_blank" rel="noopener">賣場＋</a>
+        <!--         <a class="btn" href="https://www.twitch.tv/leihustore" target="_blank" rel="noopener">Twitch</a> -->
+        <!--         <a class="btn" href="https://www.youtube.com/@leihustore" target="_blank" rel="noopener">YouTube</a> -->
+        <!--         <a class="btn" href="https://famistore.famiport.com.tw/famistore/users/28555/malls/0100000000000000003ad1cd" target="_blank" rel="noopener">賣場＋</a> -->
+        <a class="btn iconbtn -tw" href="https://www.twitch.tv/leihustore" target="_blank" rel="noopener" aria-label="Twitch">
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M4 3h16v11l-4 4h-4l-3 3v-3H6V3z"></path>
+            <rect x="9" y="7" width="2" height="5"></rect>
+            <rect x="13" y="7" width="2" height="5"></rect>
+          </svg>
+          <span class="sr-only">Twitch</span>
+        </a>
+        <a class="btn iconbtn -yt" href="https://www.youtube.com/@leihustore" target="_blank" rel="noopener" aria-label="YouTube">
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+            <rect x="2" y="6" width="20" height="12" rx="3" ry="3"></rect>
+            <polygon points="10,9 16,12 10,15"></polygon>
+          </svg>
+          <span class="sr-only">YouTube</span>
+        </a>
+        <a class="btn iconbtn -shop" href="https://famistore.famiport.com.tw/famistore/users/28555/malls/0100000000000000003ad1cd"
+           target="_blank" rel="noopener" aria-label="賣場＋">
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M3 4h2l1.6 8.4a2 2 0 0 0 2 1.6h8a2 2 0 0 0 2-1.6L20 7H6"></path>
+            <circle cx="10" cy="19" r="1.5"></circle>
+            <circle cx="16.5" cy="19" r="1.5"></circle>
+          </svg>
+          <span class="sr-only">賣場＋</span>
+        </a>
       </div>
     </section>
     <div class="gap"></div>
