@@ -2,36 +2,246 @@
 <html lang="zh-Hant">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>我的 Linktree</title>
-  <meta name="description" content="把所有連結放在這裡" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>雷虎商店｜Link Hub</title>
+  <meta name="description" content="雷虎商店 Link Hub：Twitch、YouTube、賣場+ 與最新影片" />
+  <meta property="og:title" content="雷虎商店｜Link Hub" />
+  <meta property="og:description" content="一頁聚合：Twitch、YouTube、賣場+ 與最新影片" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://i.imgur.com/2ZC3F2i.png" />
+  <meta name="theme-color" content="#0ea5e9" />
   <style>
-    :root { --w: 560px; --r: 18px; --pad: 14px; }
+    :root {
+      --bg: #0f172a;          /* 背景 */
+      --card: #111827;        /* 卡片底 */
+      --muted: #94a3b8;       /* 次要文字 */
+      --text: #e2e8f0;        /* 主要文字 */
+      --brand: #0ea5e9;       /* 主色 */
+      --border: rgba(148,163,184,.25);
+      --radius: 18px;
+      --maxw: 1100px;
+    }
+    @media (prefers-color-scheme: light) {
+      :root { --bg:#f8fafc; --card:#ffffff; --text:#0f172a; --muted:#475569; --border: rgba(2,6,23,.1); }
+    }
     * { box-sizing: border-box; }
-    html, body { height:100%; margin:0; }
-    body { display:grid; place-items:center; font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial; background:#0f172a; color:#e2e8f0; }
-    .card { width:min(92vw,var(--w)); padding:40px 24px; border-radius:24px; background:rgba(30,41,59,.6); backdrop-filter:saturate(160%) blur(8px); box-shadow:0 10px 30px rgba(0,0,0,.35); }
-    .avatar { width:92px; height:92px; border-radius:50%; display:block; margin:0 auto 14px; border:3px solid rgba(255,255,255,.15); object-fit:cover; }
-    h1 { text-align:center; margin:8px 0 4px; font-size:24px; }
-    p.bio { text-align:center; margin:0 0 18px; opacity:.8; }
-    .links { display:grid; gap:12px; margin-top:12px; }
-    .btn { display:flex; align-items:center; justify-content:center; gap:10px; padding:14px var(--pad); border-radius:var(--r); background:#334155; color:#e2e8f0; text-decoration:none; font-weight:600; transition:transform .06s ease, background .2s ease; border:1px solid rgba(148,163,184,.25); }
-    .btn:hover { transform:translateY(-1px); background:#3b475f; }
-    .footer { margin-top:16px; text-align:center; font-size:12px; opacity:.6; }
+    html, body { height: 100%; margin: 0; }
+    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif; background: var(--bg); color: var(--text); }
+
+    .wrap { width: min(94vw, var(--maxw)); margin: 32px auto 56px; }
+    .section { background: var(--card); border:1px solid var(--border); border-radius: 24px; padding: 24px; box-shadow: 0 10px 30px rgba(0,0,0,.25); }
+    .gap { height: 18px; }
+
+    /* 頁首 Logo */
+    .logoBox { display: grid; place-items: center; padding: 28px 20px; }
+    .logo { width: 140px; height: 140px; border-radius: 50%; object-fit: cover; border: 4px solid rgba(255,255,255,.12); box-shadow: 0 6px 22px rgba(0,0,0,.25); }
+
+    /* 主要連結按鈕 */
+    .linksRow { display: grid; grid-template-columns: 1fr; gap: 12px; }
+    @media (min-width: 720px) { .linksRow { grid-template-columns: repeat(3, 1fr); } }
+    .btn { display:flex; align-items:center; justify-content:center; gap:10px; padding: 14px 16px; border-radius: var(--radius); border:1px solid var(--border); background:#1f2937; color:#e5e7eb; text-decoration:none; font-weight:700; text-align:center; transition: transform .06s ease, background .2s ease; }
+    .btn:hover { transform: translateY(-1px); background:#273446; }
+
+    /* 雙欄：左 YT 最新、右 Twitch */
+    .twoCol { display:grid; gap: 16px; }
+    @media (min-width: 980px) { .twoCol { grid-template-columns: 1.2fr 1fr; } }
+    .h2 { margin: 0 0 10px; font-size: clamp(18px, 2.4vw, 22px); letter-spacing:.5px; }
+
+    /* Carousel */
+    .carousel { position: relative; }
+    .track { display:flex; gap:12px; overflow-x:auto; scroll-snap-type:x proximity; padding-bottom: 6px; }
+    .card { flex: 0 0 clamp(70%, 420px, 90%); scroll-snap-align:start; border:1px solid var(--border); background:#0b1220; border-radius: 16px; overflow: hidden; }
+    @media (min-width: 720px) { .card { flex-basis: 60%; } }
+    @media (min-width: 1100px) { .card { flex-basis: 48%; } }
+    .thumb { position: relative; aspect-ratio: 16/9; width: 100%; background:#0a0f1c; display:block; }
+    .thumb > img { width:100%; height:100%; object-fit: cover; display:block; }
+    .meta { padding: 12px; }
+    .title { font-size: 14px; line-height: 1.35; margin: 0 0 6px; }
+    .meta small { color: var(--muted); }
+    .navBtn { position:absolute; top: 42%; transform: translateY(-50%); border:1px solid var(--border); background: rgba(15,23,42,.6); color:#e5e7eb; width:36px; height:36px; border-radius:50%; display:grid; place-items:center; cursor:pointer; backdrop-filter: blur(6px); }
+    .navPrev { left: -6px; } .navNext { right: -6px; }
+
+    /* Twitch 16:9 容器 */
+    .ratio { position: relative; width: 100%; aspect-ratio: 16/9; background:#0b1220; border:1px solid var(--border); border-radius: 16px; overflow:hidden; }
+    .ratio iframe { position:absolute; inset:0; width:100%; height:100%; border:0; }
+
+    /* 更多影片 Grid（每列 3 個，自動換列） */
+    .grid3 { display:grid; grid-template-columns: 1fr; gap: 12px; }
+    @media (min-width: 720px) { .grid3 { grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width: 1040px) { .grid3 { grid-template-columns: repeat(3, 1fr); } }
+    .vcell { border:1px solid var(--border); border-radius: 16px; overflow:hidden; background:#0b1220; }
+    .vcell .thumb { display:block; }
+    .vcell .meta { padding: 10px 12px; }
+
+    .footer { text-align:center; color: var(--muted); font-size: 12px; margin-top: 18px; }
   </style>
 </head>
 <body>
-  <main class="card">
-    <img class="avatar" src="https://avatars.githubusercontent.com/u/9919" alt="avatar" />
-    <h1>@你的名稱</h1>
-    <p class="bio">這裡放一句話自介。</p>
-    <div class="links">
-      <a class="btn" href="https://x.com/" target="_blank" rel="noopener">Twitter / X</a>
-      <a class="btn" href="https://www.youtube.com/" target="_blank" rel="noopener">YouTube</a>
-      <a class="btn" href="https://twitch.tv/" target="_blank" rel="noopener">Twitch</a>
-      <a class="btn" href="mailto:you@example.com" target="_blank" rel="noopener">Email</a>
-    </div>
-    <div class="footer">© 2025 你的名稱</div>
-  </main>
+  <div class="wrap">
+
+    <!-- 1) Logo 區 -->
+    <section class="section logoBox">
+      <!-- TODO: 換成你的 Logo 連結 -->
+      <img class="logo" id="logo" src="https://avatars.githubusercontent.com/u/9919" alt="雷虎商店 Logo" />
+    </section>
+
+    <div class="gap"></div>
+
+    <!-- 2) 主要連結（Twitch / YouTube / 賣場+） -->
+    <section class="section">
+      <div class="linksRow">
+        <a class="btn" href="https://www.twitch.tv/leihustore" target="_blank" rel="noopener">Twitch</a>
+        <a class="btn" href="https://www.youtube.com/@leihustore" target="_blank" rel="noopener">YouTube</a>
+        <a class="btn" href="https://famistore.famiport.com.tw/famistore/users/28555/malls/0100000000000000003ad1cd" target="_blank" rel="noopener">賣場＋</a>
+      </div>
+    </section>
+
+    <div class="gap"></div>
+
+    <!-- 3) 左右並排：左：YT 最新（左右滑動），右：Twitch Embed -->
+    <section class="section twoCol">
+      <div>
+        <h2 class="h2">最新上傳</h2>
+        <div class="carousel">
+          <button class="navBtn navPrev" aria-label="上一張" title="上一張">◀</button>
+          <div class="track" id="yt-track"></div>
+          <button class="navBtn navNext" aria-label="下一張" title="下一張">▶</button>
+        </div>
+      </div>
+      <div>
+        <h2 class="h2">Twitch 直播</h2>
+        <div class="ratio">
+          <!-- 以 JS 動態帶入 parent= 目前網域，避免手動改域名 -->
+          <iframe id="twitchPlayer" allowfullscreen="true" scrolling="no" title="Twitch Player"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <div class="gap"></div>
+
+    <!-- 4) 更多影片（每列 3 個，自動換列） -->
+    <section class="section">
+      <h2 class="h2">更多影片</h2>
+      <div class="grid3" id="yt-grid"></div>
+      <div class="footer">更新以最新上傳為主</div>
+    </section>
+
+    <div class="footer">© <span id="year"></span> 雷虎商店</div>
+  </div>
+
+  <script>
+    // ======== 站點設定 ========
+    const CONFIG = {
+      logoUrl: '', // 可選：自訂 Logo URL（空字串保留預設）
+      twitchChannel: 'leihustore',
+      youtube: {
+        // 你們的頻道：@leihustore → channelId
+        // 來源：官方頻道頁（UCwpkJmj-DnvTkYK4uWPtkUA）
+        channelId: 'UCwpkJmj-DnvTkYK4uWPtkUA',
+        apiKey: '', // 可選：填入 YouTube Data API v3 Key（建議設 Referrer 限制）
+        maxResults: 15,
+        // 沒 API Key 的後備：手動維護最新影片 ID（可隨時增減）
+        manualVideoIds: [
+          'T9UcKMO3tKc','K9urc-JaKO8','4eYiLJh3dzg','0l1d1z2W19o','RZNY-lcLUrk','5gjwjCB1Y4E'
+        ]
+      }
+    };
+
+    // ======== 初始化靜態元素 ========
+    document.getElementById('year').textContent = new Date().getFullYear();
+    if (CONFIG.logoUrl) {
+      document.getElementById('logo').src = CONFIG.logoUrl;
+    }
+
+    // Twitch parent 需與當前網域一致
+    (function initTwitch(){
+      const parent = location.hostname || 'www.example.com';
+      const src = new URL('https://player.twitch.tv/');
+      src.searchParams.set('channel', CONFIG.twitchChannel);
+      src.searchParams.set('parent', parent);
+      src.searchParams.set('autoplay', 'false');
+      src.searchParams.set('muted', 'true');
+      document.getElementById('twitchPlayer').src = src.toString();
+    })();
+
+    // ======== 取得 YouTube 影片 ========
+    async function fetchLatestVideoIds(){
+      const { apiKey, channelId, maxResults, manualVideoIds } = CONFIG.youtube;
+      if (!apiKey) return manualVideoIds; // 無 Key 就用手動清單
+      try {
+        const url = new URL('https://www.googleapis.com/youtube/v3/search');
+        url.searchParams.set('key', apiKey);
+        url.searchParams.set('channelId', channelId);
+        url.searchParams.set('part', 'snippet');
+        url.searchParams.set('order', 'date');
+        url.searchParams.set('type', 'video');
+        url.searchParams.set('maxResults', String(maxResults));
+        const res = await fetch(url);
+        if (!res.ok) throw new Error('YouTube API 錯誤');
+        const data = await res.json();
+        return data.items.map(v => v.id && v.id.videoId).filter(Boolean);
+      } catch (err) {
+        console.warn('[YouTube] 讀取失敗，改用手動清單', err);
+        return CONFIG.youtube.manualVideoIds;
+      }
+    }
+
+    function ytThumb(id){
+      return `https://i.ytimg.com/vi/${id}/hqdefault.jpg`;
+    }
+
+    function createCard(id, title){
+      const a = document.createElement('a');
+      a.href = `https://www.youtube.com/watch?v=${id}`;
+      a.target = '_blank';
+      a.rel = 'noopener';
+      a.className = 'card';
+      a.innerHTML = `
+        <span class="thumb"><img loading="lazy" src="${ytThumb(id)}" alt="${title || 'YouTube 影片'}" /></span>
+        <div class="meta">
+          <p class="title">${title || 'YouTube 影片'}</p>
+          <small>點擊前往 YouTube</small>
+        </div>`;
+      return a;
+    }
+
+    function createGridCell(id, title){
+      const a = document.createElement('a');
+      a.href = `https://www.youtube.com/watch?v=${id}`;
+      a.target = '_blank'; a.rel = 'noopener';
+      a.className = 'vcell';
+      a.innerHTML = `
+        <span class="thumb"><img loading="lazy" src="${ytThumb(id)}" alt="${title || 'YouTube 影片'}" /></span>
+        <div class="meta"><p class="title">${title || 'YouTube 影片'}</p></div>`;
+      return a;
+    }
+
+    function bindCarouselNav(){
+      const track = document.getElementById('yt-track');
+      const prev = document.querySelector('.navPrev');
+      const next = document.querySelector('.navNext');
+      const step = () => track.clientWidth * 0.9;
+      prev.addEventListener('click', () => track.scrollBy({ left: -step(), behavior: 'smooth' }));
+      next.addEventListener('click', () => track.scrollBy({ left: step(), behavior: 'smooth' }));
+    }
+
+    async function init(){
+      const ids = await fetchLatestVideoIds();
+      const track = document.getElementById('yt-track');
+      const grid = document.getElementById('yt-grid');
+
+      // 前 4 個放在 Carousel（可自行調整數量）
+      const head = ids.slice(0, 4);
+      head.forEach(id => track.appendChild(createCard(id)));
+
+      // 其餘放在 3 欄 Grid，自動換列
+      const rest = ids.slice(4);
+      rest.forEach(id => grid.appendChild(createGridCell(id)));
+
+      bindCarouselNav();
+    }
+
+    init();
+  </script>
 </body>
 </html>
