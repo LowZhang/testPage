@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>我的 Linktree</title>
+  <meta name="description" content="把所有連結放在這裡" />
+  <style>
+    :root { --w: 560px; --r: 18px; --pad: 14px; }
+    * { box-sizing: border-box; }
+    html, body { height:100%; margin:0; }
+    body { display:grid; place-items:center; font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial; background:#0f172a; color:#e2e8f0; }
+    .card { width:min(92vw,var(--w)); padding:40px 24px; border-radius:24px; background:rgba(30,41,59,.6); backdrop-filter:saturate(160%) blur(8px); box-shadow:0 10px 30px rgba(0,0,0,.35); }
+    .avatar { width:92px; height:92px; border-radius:50%; display:block; margin:0 auto 14px; border:3px solid rgba(255,255,255,.15); object-fit:cover; }
+    h1 { text-align:center; margin:8px 0 4px; font-size:24px; }
+    p.bio { text-align:center; margin:0 0 18px; opacity:.8; }
+    .links { display:grid; gap:12px; margin-top:12px; }
+    .btn { display:flex; align-items:center; justify-content:center; gap:10px; padding:14px var(--pad); border-radius:var(--r); background:#334155; color:#e2e8f0; text-decoration:none; font-weight:600; transition:transform .06s ease, background .2s ease; border:1px solid rgba(148,163,184,.25); }
+    .btn:hover { transform:translateY(-1px); background:#3b475f; }
+    .footer { margin-top:16px; text-align:center; font-size:12px; opacity:.6; }
+  </style>
+</head>
+<body>
+  <main class="card">
+    <img class="avatar" src="https://avatars.githubusercontent.com/u/9919" alt="avatar" />
+    <h1>@你的名稱</h1>
+    <p class="bio">這裡放一句話自介。</p>
+    <div class="links">
+      <a class="btn" href="https://x.com/" target="_blank" rel="noopener">Twitter / X</a>
+      <a class="btn" href="https://www.youtube.com/" target="_blank" rel="noopener">YouTube</a>
+      <a class="btn" href="https://twitch.tv/" target="_blank" rel="noopener">Twitch</a>
+      <a class="btn" href="mailto:you@example.com" target="_blank" rel="noopener">Email</a>
+    </div>
+    <div class="footer">© 2025 你的名稱</div>
+  </main>
+</body>
+</html>
