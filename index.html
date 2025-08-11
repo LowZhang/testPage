@@ -3,20 +3,20 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>雷虎商店｜Link Hub</title>
-  <meta name="description" content="雷虎商店 Link Hub：Twitch、YouTube、賣場+ 與最新影片" />
-  <meta property="og:title" content="雷虎商店｜Link Hub" />
-  <meta property="og:description" content="一頁聚合：Twitch、YouTube、賣場+ 與最新影片" />
+  <title>毛毛雷虎</title>
+  <meta name="description" content="毛毛雷虎 - Twitch、YouTube、賣場+、Cover" />
+  <meta property="og:title" content="毛毛雷虎" />
+  <meta property="og:description" content="毛毛雷虎 - Twitch、YouTube、賣場+ 、Cover" />
   <meta property="og:type" content="website" />
   <meta property="og:image" content="https://i.imgur.com/2ZC3F2i.png" />
   <meta name="theme-color" content="#0ea5e9" />
   <style>
     :root {
-      --bg: #0f172a;          /* 背景 */
-      --card: #111827;        /* 卡片底 */
-      --muted: #94a3b8;       /* 次要文字 */
-      --text: #e2e8f0;        /* 主要文字 */
-      --brand: #0ea5e9;       /* 主色 */
+      --bg: #0f172a;         
+      --card: #111827;       
+      --muted: #94a3b8;      
+      --text: #e2e8f0;        
+      --brand: #0ea5e9;    
       --border: rgba(148,163,184,.25);
       --radius: 18px;
       --maxw: 1100px;
@@ -32,22 +32,18 @@
     .section { background: var(--card); border:1px solid var(--border); border-radius: 24px; padding: 24px; box-shadow: 0 10px 30px rgba(0,0,0,.25); }
     .gap { height: 18px; }
 
-    /* 頁首 Logo */
     .logoBox { display: grid; place-items: center; padding: 28px 20px; }
     .logo { width: 140px; height: 140px; border-radius: 50%; object-fit: cover; border: 4px solid rgba(255,255,255,.12); box-shadow: 0 6px 22px rgba(0,0,0,.25); }
 
-    /* 主要連結按鈕 */
     .linksRow { display: grid; grid-template-columns: 1fr; gap: 12px; }
     @media (min-width: 720px) { .linksRow { grid-template-columns: repeat(3, 1fr); } }
     .btn { display:flex; align-items:center; justify-content:center; gap:10px; padding: 14px 16px; border-radius: var(--radius); border:1px solid var(--border); background:#1f2937; color:#e5e7eb; text-decoration:none; font-weight:700; text-align:center; transition: transform .06s ease, background .2s ease; }
     .btn:hover { transform: translateY(-1px); background:#273446; }
 
-    /* 雙欄：左 YT 最新、右 Twitch */
     .twoCol { display:grid; gap: 16px; }
     @media (min-width: 980px) { .twoCol { grid-template-columns: 1.2fr 1fr; } }
     .h2 { margin: 0 0 10px; font-size: clamp(18px, 2.4vw, 22px); letter-spacing:.5px; }
 
-    /* Carousel */
     .carousel { position: relative; }
     .track { display:flex; gap:12px; overflow-x:auto; scroll-snap-type:x proximity; padding-bottom: 6px; }
     .card { flex: 0 0 clamp(70%, 420px, 90%); scroll-snap-align:start; border:1px solid var(--border); background:#0b1220; border-radius: 16px; overflow: hidden; }
@@ -61,33 +57,25 @@
     .navBtn { position:absolute; top: 42%; transform: translateY(-50%); border:1px solid var(--border); background: rgba(15,23,42,.6); color:#e5e7eb; width:36px; height:36px; border-radius:50%; display:grid; place-items:center; cursor:pointer; backdrop-filter: blur(6px); }
     .navPrev { left: -6px; } .navNext { right: -6px; }
 
-    /* Twitch 16:9 容器 */
     .ratio { position: relative; width: 100%; aspect-ratio: 16/9; background:#0b1220; border:1px solid var(--border); border-radius: 16px; overflow:hidden; }
     .ratio iframe { position:absolute; inset:0; width:100%; height:100%; border:0; }
 
-    /* 更多影片 Grid（每列 3 個，自動換列） */
     .grid3 { display:grid; grid-template-columns: 1fr; gap: 12px; }
     @media (min-width: 720px) { .grid3 { grid-template-columns: repeat(2, 1fr); } }
     @media (min-width: 1040px) { .grid3 { grid-template-columns: repeat(3, 1fr); } }
     .vcell { border:1px solid var(--border); border-radius: 16px; overflow:hidden; background:#0b1220; }
     .vcell .thumb { display:block; }
     .vcell .meta { padding: 10px 12px; }
-
+    .more { display:flex; justify-content:center; margin-top:10px; }
     .footer { text-align:center; color: var(--muted); font-size: 12px; margin-top: 18px; }
   </style>
 </head>
 <body>
   <div class="wrap">
-
-    <!-- 1) Logo 區 -->
     <section class="section logoBox">
-      <!-- TODO: 換成你的 Logo 連結 -->
       <img class="logo" id="logo" src="https://avatars.githubusercontent.com/u/9919" alt="雷虎商店 Logo" />
     </section>
-
     <div class="gap"></div>
-
-    <!-- 2) 主要連結（Twitch / YouTube / 賣場+） -->
     <section class="section">
       <div class="linksRow">
         <a class="btn" href="https://www.twitch.tv/leihustore" target="_blank" rel="noopener">Twitch</a>
@@ -95,10 +83,7 @@
         <a class="btn" href="https://famistore.famiport.com.tw/famistore/users/28555/malls/0100000000000000003ad1cd" target="_blank" rel="noopener">賣場＋</a>
       </div>
     </section>
-
     <div class="gap"></div>
-
-    <!-- 3) 左右並排：左：YT 最新（左右滑動），右：Twitch Embed -->
     <section class="section twoCol">
       <div>
         <!--         <h2 class="h2">最新上傳</h2> -->
@@ -111,22 +96,17 @@
       <div>
         <!--         <h2 class="h2">Twitch 直播</h2> -->
         <div class="ratio">
-          <!-- 以 JS 動態帶入 parent= 目前網域，避免手動改域名 -->
           <iframe id="twitchPlayer" allowfullscreen="true" scrolling="no" title="Twitch Player"></iframe>
         </div>
       </div>
     </section>
-
     <div class="gap"></div>
-
-    <!-- 4) 更多影片（每列 3 個，自動換列） -->
     <section class="section">
       <!--       <h2 class="h2">更多影片</h2> -->
       <div class="grid3" id="yt-grid"></div>
       <!--       <div class="footer">更新以最新上傳為主</div> -->
     </section>
-
-    <div class="footer">© <span id="year"></span> 雷虎商店</div>
+    <!--     <div class="footer">© <span id="year"></span> 雷虎商店</div> -->
   </div>
 
   <script>
@@ -134,13 +114,14 @@
     const CONFIG = {
       logoUrl: '', // 可選：自訂 Logo URL（空字串保留預設）
       twitchChannel: 'leihustore',
+      playlist: {
+        id: 'PLTTobu2nJfiqhgaglxEILPgO7TRwGVmny', // 你的播放清單 ID
+        pageSize: 9                                 // 每次載入 9 支（3x3）
+      },
       youtube: {
-        // 你們的頻道：@leihustore → channelId
-        // 來源：官方頻道頁（UCwpkJmj-DnvTkYK4uWPtkUA）
         channelId: 'UCwpkJmj-DnvTkYK4uWPtkUA',
-        apiKey: 'AIzaSyDg_P-BydTf3EROTR-yyLmDabjFXcKfwqg', // 可選：填入 YouTube Data API v3 Key（建議設 Referrer 限制）
+        apiKey: 'AIzaSyDg_P-BydTf3EROTR-yyLmDabjFXcKfwqg', 
         maxResults: 15,
-        // 沒 API Key 的後備：手動維護最新影片 ID（可隨時增減）
         manualVideoIds: [
           'T9UcKMO3tKc','K9urc-JaKO8','4eYiLJh3dzg','0l1d1z2W19o','RZNY-lcLUrk','5gjwjCB1Y4E'
         ]
@@ -152,7 +133,28 @@
     if (CONFIG.logoUrl) {
       document.getElementById('logo').src = CONFIG.logoUrl;
     }
-
+    // ==== 播放清單（每列 3 個；可分頁載入） ====
+    async function fetchPlaylistPage(pageToken){
+      const pl = CONFIG.playlist || {};
+      const key = (CONFIG.youtube||{}).apiKey;
+      if (!pl.id || !key) return { items: [], nextPageToken: null };
+    
+      const url = new URL('https://www.googleapis.com/youtube/v3/playlistItems');
+      url.searchParams.set('key', key);
+      url.searchParams.set('playlistId', pl.id);
+      url.searchParams.set('part', 'snippet,contentDetails');
+      url.searchParams.set('maxResults', String(Math.min(pl.pageSize||9, 50)));
+      if (pageToken) url.searchParams.set('pageToken', pageToken);
+    
+      const res = await fetch(url);
+      if (!res.ok) throw new Error('YouTube API 錯誤');
+      const data = await res.json();
+      const items = (data.items||[]).map(v => ({
+        id: (v.contentDetails || v.snippet?.resourceId)?.videoId,
+        title: v.snippet?.title || 'YouTube 影片'
+      })).filter(x=>x.id);
+      return { items, nextPageToken: data.nextPageToken || null };
+    }
     // Twitch parent 需與當前網域一致
     (function initTwitch(){
       const parent = location.hostname || 'www.example.com';
@@ -186,6 +188,34 @@
       }
     }
 
+    async function initPlaylistSection(){
+      const sec  = document.getElementById('pl-section');
+      const grid = document.getElementById('pl-grid');
+      const more = document.getElementById('pl-more');
+      const pl   = CONFIG.playlist || {};
+      const key  = (CONFIG.youtube||{}).apiKey;
+    
+      // 若缺 id 或 key，就隱藏整塊
+      if (!sec || !grid || !more || !pl.id || !key) {
+        if (sec) sec.style.display = 'none';
+        return;
+      }
+    
+      let nextToken = null;
+    
+      async function load(){
+        try {
+          const { items, nextPageToken } = await fetchPlaylistPage(nextToken);
+          items.forEach(({id, title}) => grid.appendChild(createGridCell(id, title)));
+          nextToken = nextPageToken;
+          more.style.display = nextToken ? 'inline-flex' : 'none';
+        } catch (e) {
+          console.warn('載入播放清單失敗', e);
+          more.style.display = 'none';
+        }
+      }
+
+    
     function ytThumb(id){
       return `https://i.ytimg.com/vi/${id}/hqdefault.jpg`;
     }
@@ -242,6 +272,7 @@
     }
 
     init();
+    initPlaylistSection();
   </script>
 </body>
 </html>
