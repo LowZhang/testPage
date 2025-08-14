@@ -147,7 +147,32 @@
       .ratio iframe { position: absolute; inset: 0; width: 100%; height: 100%; }
     }
 
-
+    /* 讓 twoCol 子欄在小螢幕可縮，不會橫向爆版 */
+    .section.twoCol > * { min-width: 0; }
+    
+    /* 左邊 YT：輪播與卡片都允許縮到容器寬內 */
+    .carousel, .carousel .track { min-width: 0; }
+    a.card, a.vcell { display: block; max-width: 100%; } /* 卡片本身不超過容器 */
+    .card { max-width: 100%; }                            /* 保險再加一次 */
+    
+    /* 縮圖與標題安全收斂 */
+    .card .thumb, .vcell .thumb { width: 100%; }
+    .card .thumb img, .vcell .thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    
+    /* 長標題或沒空白的字串也不會把版面撐開 */
+    .title { 
+      overflow-wrap: anywhere;     /* 允許任意位置換行 */
+      word-break: break-word; 
+      display: -webkit-box;        /* 可選：2 行省略 */
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    
+    /* 小尺寸手機時，卡片直接佔滿寬度以避免 1px 溢出 */
+    @media (max-width: 380px){
+      .carousel .card { flex-basis: 100%; }
+    }
 
     
   </style>
