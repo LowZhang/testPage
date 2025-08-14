@@ -118,7 +118,20 @@
     /* （可選）左右箭頭也只在 hover 顯示 */
     .carousel .navBtn{ opacity:0; pointer-events:none; transition:opacity .2s }
     .carousel:hover .navBtn{ opacity:1; pointer-events:auto }
-      
+    a.card, a.vcell { 
+      text-decoration: none; 
+      color: inherit;            /* 連結顏色跟著父層 */
+    }
+    a.card:link, a.card:visited, a.card:hover, a.card:active,
+    a.vcell:link, a.vcell:visited, a.vcell:hover, a.vcell:active {
+      text-decoration: none;
+    }
+    
+    /* 若你的標題裡面還有 <a>，一併取消底線 */
+    .card .meta a, .vcell .meta a {
+      text-decoration: none; 
+      color: inherit;
+    } 
   </style>
 </head>
 <body>
