@@ -62,6 +62,7 @@
     .twoCol { display:grid; gap: 16px; }
     @media (min-width: 980px) { .twoCol { grid-template-columns: 1.2fr 1fr; } }
     .h2 { margin: 0 0 10px; font-size: clamp(18px, 2.4vw, 22px); letter-spacing:.5px; }
+    .h2 { margin: 0 0 10px; font-size: clamp(18px, 2.4vw, 22px); letter-spacing:.5px; text-align: center;}
 
     .carousel { position: relative; }
     .track { display:flex; gap:12px; overflow-x:auto; scroll-snap-type:x proximity; padding-bottom: 6px; }
@@ -262,6 +263,7 @@
       </div>
     </section>
     <div class="gap"></div>
+    <h2 class="h2">最新YT影片 & Twitch直播</h2>
     <section class="section twoCol">
       <div>
         <div class="carousel">
@@ -275,6 +277,7 @@
       </div>
     </section>
     <div class="gap"></div>
+    <h2 class="h2">Cover</h2>
     <section class="section" id="pl-section">
       <div class="grid3" id="pl-grid"></div>
       <div class="more"><button class="btn" id="pl-more" style="display:none">載入更多</button></div>
