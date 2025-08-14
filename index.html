@@ -13,11 +13,11 @@
   <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #0f172a;         
-      --card: #111827;       
-      --muted: #94a3b8;      
-      --text: #e2e8f0;        
-      --brand: #0ea5e9;    
+      --bg: #0f172a;
+      --card: #111827;
+      --muted: #94a3b8;
+      --text: #e2e8f0;
+      --brand: #0ea5e9;
       --border: rgba(148,163,184,.25);
       --radius: 18px;
       --maxw: 1100px;
@@ -25,10 +25,14 @@
     @media (prefers-color-scheme: light) {
       :root { --bg:#f8fafc; --card:#ffffff; --text:#0f172a; --muted:#475569; --border: rgba(2,6,23,.1); }
     }
+
     * { box-sizing: border-box; }
     html, body { height: 100%; margin: 0; }
-    /*     body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif; background: var(--bg); color: var(--text); } */
-    body { font-family: "Zen Maru Gothic", "Segoe UI","微軟正黑體", "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif; background: var(--bg); color: var(--text); }
+    body {
+      font-family: "Zen Maru Gothic", "Segoe UI","微軟正黑體", "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
 
     .wrap { width: min(94vw, var(--maxw)); margin: 32px auto 56px; }
     .section { background: var(--card); border:1px solid var(--border); border-radius: 24px; padding: 24px; box-shadow: 0 10px 30px rgba(0,0,0,.25); }
@@ -39,157 +43,46 @@
 
     .linksRow { display: grid; grid-template-columns: 1fr; gap: 12px; }
     @media (min-width: 720px) { .linksRow { grid-template-columns: repeat(3, 1fr); } }
-    .btn { font-size:20px;display:flex; align-items:center; justify-content:center; gap:10px; padding: 14px 16px; border-radius: var(--radius); border:1px solid var(--border); background:#1f2937; color:#e5e7eb; text-decoration:none; font-weight:700; text-align:center; transition: transform .06s ease, background .2s ease; }
+    .btn { font-size:20px; display:flex; align-items:center; justify-content:center; gap:10px; padding: 12px 16px; border-radius: var(--radius); border:1px solid var(--border); background:#1f2937; color:#e5e7eb; text-decoration:none; font-weight:700; text-align:center; transition: transform .06s ease, background .2s ease; }
     .btn:hover { transform: translateY(-1px); background:#273446; }
-    .linksRow .btn.iconbtn { padding: 16px; }
-    .icon { width: 22px; height: 22px; display: block; fill: currentColor; }
 
-    .iconbtn.-tw { color: #a970ff; }   /* Twitch 紫 */
-    .iconbtn.-yt { color: #ff0033; }   /* YouTube 紅 */
-    .iconbtn.-shop { color: #22c55e; } /* 賣場/購物 綠 */
-    .linksRow .btn.iconbtn { padding: 16px; }
-    .icon-img { width: 24px; height: 24px; display:block; }
-    
-    .sr-only {
-      position:absolute; width:1px; height:1px; padding:0; margin:-1px;
-      overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0;
-    }
-    .linksRow .btn.iconbtn { padding: 12px 16px; gap: 10px; }
     .icon { width: 24px; height: 24px; display:block; }
-    .label { font-weight: 700; letter-spacing: .2px; }
+    .label { font-weight: 700; letter-spacing:.2px; justify-self: center; text-align:center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
-    
     .twoCol { display:grid; gap: 16px; }
     @media (min-width: 980px) { .twoCol { grid-template-columns: 1.2fr 1fr; } }
-    .h2 { margin: 0 0 10px; font-size: clamp(18px, 2.4vw, 22px); letter-spacing:.5px; }
-    .h2 { margin: 0 0 10px; font-size: clamp(18px, 2.4vw, 22px); letter-spacing:.5px; text-align: center;}
+    .h2 { margin: 0 0 10px; font-size: clamp(18px, 2.4vw, 22px); letter-spacing:.5px; text-align: center; }
 
     .carousel { position: relative; }
-    .track { display:flex; gap:12px; overflow-x:auto; scroll-snap-type:x proximity; padding-bottom: 6px; }
-    .card { flex: 0 0 clamp(70%, 420px, 90%); scroll-snap-align:start; border:1px solid var(--border); background:#0b1220; border-radius: 16px; overflow: hidden; }
+    .track { display:flex; gap:12px; overflow-x:auto; scroll-snap-type:x proximity; padding-bottom: 0; scrollbar-width: none; -ms-overflow-style: none; }
+    .track::-webkit-scrollbar{ height:0 }
+    .carousel:hover .track, .carousel:focus-within .track{ padding-bottom: 6px; scrollbar-width: thin; }
+    .carousel:hover .track::-webkit-scrollbar, .carousel:focus-within .track::-webkit-scrollbar{ height: 8px; }
+    .carousel:hover .track::-webkit-scrollbar-thumb, .carousel:focus-within .track::-webkit-scrollbar-thumb{ background: rgba(148,163,184,.5); border-radius: 999px; }
+
+    .card { flex: 0 0 clamp(70%, 420px, 90%); scroll-snap-align:start; border:1px solid var(--border); background:#0b1220; border-radius: 16px; overflow: hidden; max-width: 100%; display:block; color: inherit; text-decoration: none; }
     @media (min-width: 720px) { .card { flex-basis: 60%; } }
-/*     @media (min-width: 1100px) { .card { flex-basis: 48%; } } */
     @media (min-width: 1100px) { .card { flex-basis: 60%; } }
     .thumb { position: relative; aspect-ratio: 16/9; width: 100%; background:#0a0f1c; display:block; }
     .thumb > img { width:100%; height:100%; object-fit: cover; display:block; }
     .meta { padding: 12px; }
-    .title { font-size: 16px; line-height: 1.35; margin: 0 0 6px; }
-    .meta small { color: var(--muted); }
-    .navBtn { position:absolute; top: 42%; transform: translateY(-50%); border:1px solid var(--border); background: rgba(15,23,42,.6); color:#e5e7eb; width:36px; height:36px; border-radius:50%; display:grid; place-items:center; cursor:pointer; backdrop-filter: blur(6px); }
-    .navPrev { left: -6px; } .navNext { right: -6px; }
-
-    .ratio { position: relative; width: 100%; aspect-ratio: 16/9; background:#0b1220; border:1px solid var(--border); border-radius: 16px; overflow:hidden; }
-    .ratio iframe { position:absolute; inset:0; width:100%; height:100%; border:0; }
+    .title { font-size: 16px; line-height: 1.35; margin: 0 0 6px; overflow-wrap:anywhere; word-break: break-word; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
 
     .grid3 { display:grid; grid-template-columns: 1fr; gap: 12px; }
     @media (min-width: 720px) { .grid3 { grid-template-columns: repeat(2, 1fr); } }
     @media (min-width: 1040px) { .grid3 { grid-template-columns: repeat(3, 1fr); } }
-    .vcell { border:1px solid var(--border); border-radius: 16px; overflow:hidden; background:#0b1220; }
-    .vcell .thumb { display:block; }
+    .vcell { border:1px solid var(--border); border-radius: 16px; overflow:hidden; background:#0b1220; display:block; max-width:100%; color:inherit; text-decoration:none; }
     .vcell .meta { padding: 10px 12px; }
     .more { display:flex; justify-content:center; margin-top:10px; }
-    .footer { text-align:center; color: var(--muted); font-size: 12px; margin-top: 18px; }
-  
-    .carousel .track{
-      display:flex; gap:12px; overflow-x:auto; scroll-snap-type:x proximity;
-      padding-bottom: 0;
-      scrollbar-width: none;      
-      -ms-overflow-style: none;   
-    }
-    .carousel .track::-webkit-scrollbar{ height:0 }
-    
-    .carousel:hover .track,
-    .carousel:focus-within .track{
-      padding-bottom: 6px;        /* 出現捲軸時再留空 */
-      scrollbar-width: thin;      /* Firefox */
-    }
-    .carousel:hover .track::-webkit-scrollbar,
-    .carousel:focus-within .track::-webkit-scrollbar{
-      height: 8px;
-    }
-    .carousel:hover .track::-webkit-scrollbar-thumb,
-    .carousel:focus-within .track::-webkit-scrollbar-thumb{
-      background: rgba(148,163,184,.5);
-      border-radius: 999px;
-    }
-    .carousel:hover .track::-webkit-scrollbar-track,
-    .carousel:focus-within .track::-webkit-scrollbar-track{
-      background: transparent;
-    }
-    
-    /* （可選）左右箭頭也只在 hover 顯示 */
-    .carousel .navBtn{ opacity:0; pointer-events:none; transition:opacity .2s }
-    .carousel:hover .navBtn{ opacity:1; pointer-events:auto }
-    a.card, a.vcell { 
-      text-decoration: none; 
-      color: inherit;            /* 連結顏色跟著父層 */
-    }
-    a.card:link, a.card:visited, a.card:hover, a.card:active,
-    a.vcell:link, a.vcell:visited, a.vcell:hover, a.vcell:active {
-      text-decoration: none;
-    }
-    
-    /* 若你的標題裡面還有 <a>，一併取消底線 */
-    .card .meta a, .vcell .meta a {
-      text-decoration: none; 
-      color: inherit;
-    } 
-    
-    /* 讓 twoCol 的左右欄在小螢幕可以縮小，不要撐破容器 */
-    .section.twoCol > * { min-width: 0; }
-    
-    /* 確保 Twitch 內嵌能自適應寬度 */
-    .ratio { width: 100%; aspect-ratio: 16/9; }
-    .ratio iframe { width: 100% !important; height: 100% !important; display: block; border: 0; }
-    
-    /* Safari/舊裝置後備（不支援 aspect-ratio 時） */
-    @supports not (aspect-ratio: 16/9) {
-      .ratio { position: relative; height: 0; padding-top: 56.25%; }
-      .ratio iframe { position: absolute; inset: 0; width: 100%; height: 100%; }
-    }
 
-    /* 讓 twoCol 子欄在小螢幕可縮，不會橫向爆版 */
-    .section.twoCol > * { min-width: 0; }
-    
-    /* 左邊 YT：輪播與卡片都允許縮到容器寬內 */
+    .ratio { position: relative; width: 100%; aspect-ratio: 16/9; background:#0b1220; border:1px solid var(--border); border-radius: 16px; overflow:hidden; }
+    .ratio iframe { position:absolute; inset:0; width:100%; height:100%; border:0; display:block; }
+    @supports not (aspect-ratio: 16/9) { .ratio { height: 0; padding-top: 56.25%; } }
+
+    @media (max-width: 380px){ .carousel .card { flex-basis: 100%; }
+    }
+    .twoCol > *, .section.twoCol > * { min-width: 0; }
     .carousel, .carousel .track { min-width: 0; }
-    a.card, a.vcell { display: block; max-width: 100%; } /* 卡片本身不超過容器 */
-    .card { max-width: 100%; }                            /* 保險再加一次 */
-    
-    /* 縮圖與標題安全收斂 */
-    .card .thumb, .vcell .thumb { width: 100%; }
-    .card .thumb img, .vcell .thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
-    
-    /* 長標題或沒空白的字串也不會把版面撐開 */
-    .title { 
-      overflow-wrap: anywhere;     /* 允許任意位置換行 */
-      word-break: break-word; 
-      display: -webkit-box;        /* 可選：2 行省略 */
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-    }
-    
-    /* 小尺寸手機時，卡片直接佔滿寬度以避免 1px 溢出 */
-    @media (max-width: 380px){
-      .carousel .card { flex-basis: 100%; }
-    }
-    .linksRow .btn.iconbtn{
-      display: grid;
-      grid-template-columns: 28px 1fr; /* 左 icon 28px + 右剩餘區域 */
-      align-items: center;
-      gap: 10px;
-      padding: 12px 16px;
-    }
-    .icon, .icon-img{ width:24px; height:24px; display:block; }
-    .label{
-      justify-self: center;     /* 在右側那塊空間內置中 */
-      text-align: center;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;  /* 太長時省略 */
-    }
-    
   </style>
 </head>
 <body>
@@ -197,72 +90,28 @@
     <section class="section logoBox">
       <img class="logo" id="logo" src="https://avatars.githubusercontent.com/u/9919" alt="雷虎商店 Logo" />
     </section>
+
     <div class="gap"></div>
+
     <section class="section">
       <div class="linksRow">
-        <!--         <a class="btn" href="https://www.twitch.tv/leihustore" target="_blank" rel="noopener">Twitch</a> -->
-        <!--         <a class="btn" href="https://www.youtube.com/@leihustore" target="_blank" rel="noopener">YouTube</a> -->
-        <!--         <a class="btn" href="https://famistore.famiport.com.tw/famistore/users/28555/malls/0100000000000000003ad1cd" target="_blank" rel="noopener">賣場＋</a> -->
-        
-        <!--         <a class="btn iconbtn" href="https://www.twitch.tv/leihustore" target="_blank" rel="noopener" aria-label="Twitch">
-          <img class="icon-img" src="https://cdn.simpleicons.org/twitch/9146FF" alt="">
-          <span class="sr-only">Twitch</span>
-        </a> -->
-    
-        <!--         <a class="btn iconbtn" href="https://www.youtube.com/@leihustore" target="_blank" rel="noopener" aria-label="YouTube">
-          <img class="icon-img" src="https://cdn.simpleicons.org/youtube/FF0000" alt="">
-          <span class="sr-only">YouTube</span>
-        </a> -->
-    
-        <!--         <a class="btn iconbtn" href="https://famistore.famiport.com.tw/famistore/users/28555/malls/0100000000000000003ad1cd" target="_blank" rel="noopener" aria-label="賣場＋">
-          <img class="icon-img" src="https://api.iconify.design/lucide:shopping-bag.svg?color=%2322c55e" alt="">
-          <span class="sr-only">賣場＋</span>
-        </a> -->
-        
-        <a class="btn iconbtn" href="https://www.twitch.tv/leihustore" target="_blank" rel="noopener" aria-label="Twitch" style="color:#9146FF">
+        <a class="btn" href="https://www.twitch.tv/leihustore" target="_blank" rel="noopener noreferrer" aria-label="Twitch" style="color:#9146FF">
           <img class="icon" src="https://cdn.simpleicons.org/twitch/9146FF" alt="">
           <span class="label">Twitch</span>
         </a>
-    
-        <a class="btn iconbtn" href="https://www.youtube.com/@leihustore" target="_blank" rel="noopener" aria-label="YouTube" style="color:#FF0000">
+        <a class="btn" href="https://www.youtube.com/@leihustore" target="_blank" rel="noopener noreferrer" aria-label="YouTube" style="color:#FF0000">
           <img class="icon" src="https://cdn.simpleicons.org/youtube/FF0000" alt="">
           <span class="label">YouTube</span>
         </a>
-    
-        <a class="btn iconbtn" href="https://famistore.famiport.com.tw/famistore/users/28555/malls/0100000000000000003ad1cd" target="_blank" rel="noopener" aria-label="賣場＋" style="color:#22c55e">
+        <a class="btn" href="https://famistore.famiport.com.tw/famistore/users/28555/malls/0100000000000000003ad1cd" target="_blank" rel="noopener noreferrer" aria-label="賣場＋" style="color:#22c55e">
           <img class="icon" src="https://api.iconify.design/lucide:shopping-bag.svg" alt="">
           <span class="label">賣場＋</span>
         </a>
-
-        
-        
-        <!--         <a class="btn iconbtn -tw" href="https://www.twitch.tv/leihustore" target="_blank" rel="noopener" aria-label="Twitch">
-          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M4 3h16v11l-4 4h-4l-3 3v-3H6V3z"></path>
-            <rect x="9" y="7" width="2" height="5"></rect>
-            <rect x="13" y="7" width="2" height="5"></rect>
-          </svg>
-          <span class="sr-only">Twitch</span>
-        </a>
-        <a class="btn iconbtn -yt" href="https://www.youtube.com/@leihustore" target="_blank" rel="noopener" aria-label="YouTube">
-          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
-            <rect x="2" y="6" width="20" height="12" rx="3" ry="3"></rect>
-            <polygon points="10,9 16,12 10,15"></polygon>
-          </svg>
-          <span class="sr-only">YouTube</span>
-        </a>
-        <a class="btn iconbtn -shop" href="https://famistore.famiport.com.tw/famistore/users/28555/malls/0100000000000000003ad1cd"
-           target="_blank" rel="noopener" aria-label="賣場＋">
-          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M3 4h2l1.6 8.4a2 2 0 0 0 2 1.6h8a2 2 0 0 0 2-1.6L20 7H6"></path>
-            <circle cx="10" cy="19" r="1.5"></circle>
-            <circle cx="16.5" cy="19" r="1.5"></circle>
-          </svg>
-          <span class="sr-only">賣場＋</span>
-        </a> -->
       </div>
     </section>
+
     <div class="gap"></div>
+
     <h2 class="h2">最新YT影片 & Twitch直播</h2>
     <section class="section twoCol">
       <div>
@@ -272,11 +121,13 @@
       </div>
       <div>
         <div class="ratio">
-          <iframe id="twitchPlayer" allowfullscreen="true" scrolling="no" title="Twitch Player"></iframe>
+          <iframe id="twitchPlayer" allowfullscreen="true" scrolling="no" loading="lazy" title="Twitch Player"></iframe>
         </div>
       </div>
     </section>
+
     <div class="gap"></div>
+
     <h2 class="h2">Cover</h2>
     <section class="section" id="pl-section">
       <div class="grid3" id="pl-grid"></div>
@@ -286,46 +137,23 @@
 
   <script>
     const CONFIG = {
-      logoUrl: '', 
+      logoUrl: '',
       twitchChannel: 'leihustore',
-      playlist: {
-        id: 'PLTTobu2nJfiqhgaglxEILPgO7TRwGVmny', 
-        pageSize: 9                                 
-      },
+      playlist: { id: 'PLTTobu2nJfiqhgaglxEILPgO7TRwGVmny', pageSize: 9 },
       youtube: {
         channelId: 'UCwpkJmj-DnvTkYK4uWPtkUA',
-        apiKey: 'AIzaSyDg_P-BydTf3EROTR-yyLmDabjFXcKfwqg', 
+        apiKey: 'AIzaSyDg_P-BydTf3EROTR-yyLmDabjFXcKfwqg',
         maxResults: 15,
-        manualVideoIds: [
-          'T9UcKMO3tKc','K9urc-JaKO8','4eYiLJh3dzg','0l1d1z2W19o','RZNY-lcLUrk','5gjwjCB1Y4E'
-        ]
+        manualVideoIds: ['T9UcKMO3tKc','K9urc-JaKO8','4eYiLJh3dzg','0l1d1z2W19o','RZNY-lcLUrk','5gjwjCB1Y4E']
       }
     };
 
+    // Optional logo override
     if (CONFIG.logoUrl) {
       document.getElementById('logo').src = CONFIG.logoUrl;
     }
-    async function fetchPlaylistPage(pageToken){
-      const pl = CONFIG.playlist || {};
-      const key = (CONFIG.youtube||{}).apiKey;
-      if (!pl.id || !key) return { items: [], nextPageToken: null };
-    
-      const url = new URL('https://www.googleapis.com/youtube/v3/playlistItems');
-      url.searchParams.set('key', key);
-      url.searchParams.set('playlistId', pl.id);
-      url.searchParams.set('part', 'snippet,contentDetails');
-      url.searchParams.set('maxResults', String(Math.min(pl.pageSize||9, 50)));
-      if (pageToken) url.searchParams.set('pageToken', pageToken);
-    
-      const res = await fetch(url);
-      if (!res.ok) throw new Error('YouTube API 錯誤');
-      const data = await res.json();
-      const items = (data.items||[]).map(v => ({
-        id: (v.contentDetails || v.snippet?.resourceId)?.videoId,
-        title: v.snippet?.title || 'YouTube 影片'
-      })).filter(x=>x.id);
-      return { items, nextPageToken: data.nextPageToken || null };
-    }
+
+    // Twitch embed
     (function initTwitch(){
       const parent = location.hostname || 'www.example.com';
       const src = new URL('https://player.twitch.tv/');
@@ -336,11 +164,24 @@
       document.getElementById('twitchPlayer').src = src.toString();
     })();
 
+    // YouTube helpers
+    function ytThumb(id){ return `https://i.ytimg.com/vi/${id}/hqdefault.jpg`; }
+
+    function createCard(id, title){
+      const a = document.createElement('a');
+      a.href = `https://www.youtube.com/watch?v=${id}`;
+      a.target = '_blank';
+      a.rel = 'noopener noreferrer';
+      a.className = 'card';
+      a.innerHTML = `
+        <span class="thumb"><img loading="lazy" src="${ytThumb(id)}" alt="${title || 'YouTube 影片'}" /></span>
+        <div class="meta"><p class="title">${title || 'YouTube 影片'}</p></div>`;
+      return a;
+    }
+
     async function fetchLatestVideoIds(){
       const { apiKey, channelId, maxResults, manualVideoIds } = CONFIG.youtube;
-      if (!apiKey) {
-        return manualVideoIds.map(id => ({ id, title: '' }));
-      }
+      if (!apiKey) return manualVideoIds.map(id => ({ id, title: '' }));
       try {
         const url = new URL('https://www.googleapis.com/youtube/v3/search');
         url.searchParams.set('key', apiKey);
@@ -352,51 +193,38 @@
         const res = await fetch(url);
         if (!res.ok) throw new Error('YouTube API 錯誤');
         const data = await res.json();
-        return data.items
-          .map(v => ({
-            id: v.id && v.id.videoId,
-            title: v.snippet?.title || ''
-          }))
-          .filter(v => !!v.id);
+        return data.items.map(v => ({ id: v.id && v.id.videoId, title: v.snippet?.title || '' })).filter(v => !!v.id);
       } catch (err) {
         console.warn('[YouTube] 讀取失敗，改用手動清單', err);
-        return CONFIG.youtube.manualVideoIds.map(id => ({ id, title: '' }));
+        return manualVideoIds.map(id => ({ id, title: '' }));
       }
     }
 
-    async function fetchPlaylistAll(playlistId, limit = Infinity){
+    async function fetchPlaylistAll(playlistId){
       const { apiKey } = CONFIG.youtube;
       if (!apiKey || !playlistId) return [];
-      let out = [];
-      let pageToken = null;
+      let out = []; let pageToken = null;
       do {
         const url = new URL('https://www.googleapis.com/youtube/v3/playlistItems');
         url.searchParams.set('key', apiKey);
         url.searchParams.set('playlistId', playlistId);
         url.searchParams.set('part', 'snippet,contentDetails');
-        url.searchParams.set('maxResults', '50');       // 一次最多 50
+        url.searchParams.set('maxResults', '50');
         if (pageToken) url.searchParams.set('pageToken', pageToken);
-    
         const res = await fetch(url);
         if (!res.ok) throw new Error('YouTube API 錯誤');
         const data = await res.json();
-    
         const items = (data.items || []).map(v => {
           const id = (v.contentDetails || v.snippet?.resourceId)?.videoId;
           const title = v.snippet?.title || '';
           const published = v.contentDetails?.videoPublishedAt || v.snippet?.publishedAt || 0;
           return id ? { id, title, published: new Date(published) } : null;
         }).filter(Boolean);
-    
         out.push(...items);
         pageToken = data.nextPageToken || null;
-    
-        if (out.length >= limit) break;
       } while (pageToken);
-    
-      // 新→舊
       out.sort((a, b) => b.published - a.published);
-      return limit === Infinity ? out : out.slice(0, limit);
+      return out;
     }
 
     async function initPlaylistSection(){
@@ -405,26 +233,19 @@
       const more = document.getElementById('pl-more');
       const pl   = CONFIG.playlist || {};
       const key  = (CONFIG.youtube||{}).apiKey;
-    
-      if (!sec || !grid || !more || !pl.id || !key) {
-        if (sec) sec.style.display = 'none';
-        return;
-      }
-    
-      let cache = [];
-      let idx = 0;
-      const PAGE = pl.pageSize || 9;
-    
+      if (!sec || !grid || !more || !pl.id || !key) { if (sec) sec.style.display = 'none'; return; }
+
+      let cache = []; let idx = 0; const PAGE = pl.pageSize || 9;
       function renderMore(){
         const slice = cache.slice(idx, idx + PAGE);
-        slice.forEach(v => grid.appendChild(createGridCell(v.id, v.title)));
+        slice.forEach(v => grid.appendChild(createVCell(v.id, v.title)));
         idx += slice.length;
         more.style.display = idx < cache.length ? 'inline-flex' : 'none';
       }
-    
+
       try {
         cache = await fetchPlaylistAll(pl.id);
-        renderMore();                     
+        renderMore();
         more.addEventListener('click', renderMore);
       } catch (e) {
         console.warn('載入播放清單失敗', e);
@@ -432,28 +253,10 @@
       }
     }
 
-    function ytThumb(id){
-      return `https://i.ytimg.com/vi/${id}/hqdefault.jpg`;
-    }
-
-    function createCard(id, title){
+    function createVCell(id, title){
       const a = document.createElement('a');
       a.href = `https://www.youtube.com/watch?v=${id}`;
-      a.target = '_blank';
-      a.rel = 'noopener';
-      a.className = 'card';
-      a.innerHTML = `
-        <span class="thumb"><img loading="lazy" src="${ytThumb(id)}" alt="${title || 'YouTube 影片'}" /></span>
-        <div class="meta">
-          <p class="title">${title || 'YouTube 影片'}</p>
-        </div>`;
-      return a;
-    }
-
-    function createGridCell(id, title){
-      const a = document.createElement('a');
-      a.href = `https://www.youtube.com/watch?v=${id}`;
-      a.target = '_blank'; a.rel = 'noopener';
+      a.target = '_blank'; a.rel = 'noopener noreferrer';
       a.className = 'vcell';
       a.innerHTML = `
         <span class="thumb"><img loading="lazy" src="${ytThumb(id)}" alt="${title || 'YouTube 影片'}" /></span>
@@ -461,21 +264,10 @@
       return a;
     }
 
-    function bindCarouselNav(){
-      const track = document.getElementById('yt-track');
-      const prev = document.querySelector('.navPrev');
-      const next = document.querySelector('.navNext');
-      const step = () => track.clientWidth * 0.9;
-      prev.addEventListener('click', () => track.scrollBy({ left: -step(), behavior: 'smooth' }));
-      next.addEventListener('click', () => track.scrollBy({ left: step(), behavior: 'smooth' }));
-    }
-
     async function init(){
       const videos = await fetchLatestVideoIds();
       const track = document.getElementById('yt-track');
-      const grid = document.getElementById('yt-grid');
-      const head = videos.slice(0, 20);
-      head.forEach(v => track.appendChild(createCard(v.id, v.title)));
+      videos.slice(0, 20).forEach(v => track.appendChild(createCard(v.id, v.title)));
     }
 
     init();
