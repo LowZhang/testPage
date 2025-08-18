@@ -180,10 +180,11 @@
 </head>
 <body>
   <div class="wrap">
-    <section class="section logoBox">
+    <!--     <section class="section logoBox">
       <img class="logo" id="logo" src="https://avatars.githubusercontent.com/u/9919" alt="雷虎商店 Logo" />
     </section>
-    <div class="gap"></div>
+    <div class="gap"></div> 
+    -->
     <section class="section">
       <div class="linksRow">
         <a class="btn iconbtn" href="https://www.twitch.tv/leihustore" target="_blank" rel="noopener" aria-label="Twitch" style="color:#9146FF">
@@ -228,7 +229,7 @@
       twitchChannel: 'leihustore',
       playlist: {
         id: 'PLTTobu2nJfiqhgaglxEILPgO7TRwGVmny', 
-        pageSize: 9                                 
+        pageSize: 20                                 
       },
       youtube: {
         channelId: 'UCwpkJmj-DnvTkYK4uWPtkUA',
@@ -360,6 +361,13 @@
     
       try {
         cache = await fetchPlaylistAll(pl.id);
+        const EXTRA_ID = '3FH7rxGP7aE';
+        const EXTRA_TITLE = '特別收錄'; // 想顯示正式標題可改這行
+
+        // 若清單內沒有，就加在最後
+        if (!cache.some(v => v.id === EXTRA_ID)) {
+          cache.push({ id: EXTRA_ID, title: EXTRA_TITLE, published: new Date(0) });
+        }
         renderMore();                     
         more.addEventListener('click', renderMore);
       } catch (e) {
